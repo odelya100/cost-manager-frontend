@@ -23,3 +23,15 @@ export async function fetchRates() {
     const data = await response.json();
     return data;
 }
+
+export function convertCurrency(amount, fromCurrency, toCurrency, rates) {
+    if (fromCurrency === toCurrency) {
+        return amount;
+    }
+
+    const amountInUSD = amount / rates[fromCurrency];
+    const convertedAmount = amountInUSD * rates[toCurrency];
+
+    return convertedAmount;
+}
+
