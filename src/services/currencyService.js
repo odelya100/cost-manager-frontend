@@ -7,3 +7,19 @@ export function saveRatesUrl(url) {
 export function getRatesUrl() {
     return localStorage.getItem(STORAGE_KEY);
 }
+export async function fetchRates() {
+    const url = getRatesUrl();
+
+    if (!url) {
+        throw new Error("Currency rates URL is not set");
+    }
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch currency rates");
+    }
+
+    const data = await response.json();
+    return data;
+}
