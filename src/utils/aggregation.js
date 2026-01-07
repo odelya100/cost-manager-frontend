@@ -23,3 +23,24 @@ export function aggregateByMonth(costs, year) {
 
     return monthlyTotals;
 }
+
+export function aggregateByCategoryForMonth(costs, year, month) {
+    const result = {};
+
+    costs.forEach(cost => {
+        if (
+            cost.date.year === year &&
+            cost.date.month === month
+        ) {
+            const category = cost.category;
+
+            if (!result[category]) {
+                result[category] = 0;
+            }
+
+            result[category] += cost.sum;
+        }
+    });
+
+    return result;
+}
