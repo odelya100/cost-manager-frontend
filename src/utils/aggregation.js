@@ -11,3 +11,15 @@ export function aggregateByCategory(costs) {
 
     return result;
 }
+export function aggregateByMonth(costs, year) {
+    const monthlyTotals = Array(12).fill(0);
+
+    costs.forEach(cost => {
+        if (cost.date.year === year) {
+            const monthIndex = cost.date.month - 1;
+            monthlyTotals[monthIndex] += cost.sum;
+        }
+    });
+
+    return monthlyTotals;
+}
